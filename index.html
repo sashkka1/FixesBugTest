@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>MathScore</title>
+    <link rel="stylesheet" href="./style.css" /></link>
+    <link rel="stylesheet" id="theme" href="./style.css" /></link>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+    <script src="https://telegram.org/js/telegram-web-app.js?v=1.0.1"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Round">
+</head>
+<body>
+
+    <div class="different-theme-block" id="different-theme-block">
+        <div class="conteiner" id="conteiner">
+            <div class="standart" id="standart"></div>
+            <div class="dark" id="dark"></div>
+            <div class="red" id="red"></div>
+            <div class="green" id="green"></div>
+        </div>
+    </div>
+
+    <div  id="main1">
+        <div class="main1 cssmain2">
+        <div class="main1 cssmain1">
+            <div class="header1">
+                <p id="win-message" class="win-message none">Ошибки: <br> Время: </p>
+                <div class="different-theme" id="different-theme"></div>
+            </div>
+            <div class="choice">
+                <p class="choice-value"><input type="checkbox" id="checkbox+" value="0"> +</p>
+                <p class="choice-value"><input type="checkbox" id="checkbox-" value="1"> −</p>
+                <p class="choice-value"><input type="checkbox" id="checkboxx" value="2"> ⋅</p>
+                <p class="choice-value"><input type="checkbox" id="checkbox/" value="3"> ∶</p>
+                <p class="choice-value"><input type="checkbox">⏱</p>
+            </div>
+
+            <div class="tuning-small-big">
+                <button class="small-range cssmain2" id="small-range">Малый</button>
+                <button class="big-range cssmain2" id="big-range">Большой</button>
+                <button class="small-range cssmain1" id="small-range">Малый</button>
+                <button class="big-range cssmain1" id="big-range">Большой</button>
+            </div>
+
+            <div class="filter">
+                <p>Диапозон для: +, −</p>
+                <div class="easy-basket-filter">
+                    <div class="easy-basket-filter-info">
+                        <p class="iLower"><input disabled type="text" id="easy-basket-lower" class="easy-basket-lower forPSize" value="0" min="0" max="300" maxlength=3/></p>
+                        <p class="iUpper"><input disabled type="text" class="easy-basket-upper forPSize" value="100" min="0" max="300" maxlength=3/></p>
+                    </div>
+
+                    <div class="easy-basket-filter-range">
+                        <input type="range" class="lower range" step="1" min="0" max="300" value="0"/>
+                        <input type="range" class="upper range" step="1" min="0" max="300" value="100"/>
+                        <div class="fill"></div>
+                    </div>
+
+                    <div class="easy-basket-filter-ticks">
+                    </div>
+                </div>
+            </div>
+            <div class="filter">
+                <p>Диапозон для: ⋅, ∶</p>
+                <div class="easy-basket-filter-double">
+                    <div class="easy-basket-filter-info-double">
+                        <p class="iLower-double cssmain2"><input disabled type="text" class="easy-basket-lower-double forPSize" value="0" min="0" max="50" maxlength=2/></p>
+                        <p class="iUpper-double cssmain2"><input disabled type="text" class="easy-basket-upper-double forPSize" value="20" min="0" max="50" maxlength=2/></p>
+                    </div>
+
+                    <div class="easy-basket-filter-range-double">
+                        <input type="range" class="lower-double range-double" step="1" min="0" max="50" value="0"/>
+                        <input type="range" class="upper-double range-double" step="1" min="0" max="50" value="20"/>
+                        <div class="fill-double"></div>
+                    </div>
+
+                    <div class="easy-basket-filter-ticks-double"></div>
+                </div>
+            </div>
+            <div class="filter">
+                <p>Количество примеров</p>
+                <div class="easy-basket-filter-three">
+                    <div class="easy-basket-filter-info-three">
+                        <p class="iLower-three cssmain2"><input disabled type="text" class="easy-basket-lower-three forPSize" value="10" min="5" max="25" maxlength=2/></p>
+                        <!-- <p class="iUpper-three cssmain2"><input disabled type="text" class="easy-basket-lower-three forPSize" value="0" min="5" max="25" maxlength=2/></p> -->
+                    </div>
+
+                    <div class="easy-basket-filter-range-three">
+                        <input type="range" class="lower-three range-three" step="1" min="5" max="25" value="10"/>
+                        <!-- <input type="range" class="upper-three range-three" step="1" min="5" max="25" value="25"/> -->
+                    </div>
+
+                    <div class="easy-basket-filter-ticks-three"></div>
+                </div>
+            </div>
+
+            <button class="start-button cssmain2" id="start-button">Начать</button>
+            <button class="start-button cssmain1" id="start-button">Начать</button>
+        </div>
+    </div>
+
+    <div class = "none"  id="main2">
+        <div class="main2 cssmain2">
+            <div class="header">
+                <div class="back-to-home" id="back-to-home">
+                    <span class="material-icons-round home">home</span>
+                </div>
+                <div class="time">
+                    <div class="wrapper-stopwath">
+                        <p><span id="seconds">00</span>:<span id="tens">00</span></p>
+                        <p><span id="seconds"></span><span id="tens"></span></p>
+                    </div> 
+                </div>
+                <div class="score">
+                    <p id="score">/</p>
+                </div>
+            </div>
+
+            <div class="example-block">
+                <p class="number" id="example">35 + 343 = </p>
+                <div class="example-answer" id="example-answer-block">
+                    <p id="example-answer"></p>
+                </div>
+            </div>
+
+            <div class="keyboard">
+                <button  class="cssmain2" id="number-1" value="1"> 1 </button>
+                <button  class="cssmain2" id="number-2" value="2"> 2 </button>
+                <button  class="cssmain2" id="number-3" value="3"> 3 </button>
+                <button  class="cssmain2" id="number-4" value="4"> 4 </button>
+                <button  class="cssmain2" id="number-5" value="5"> 5 </button>
+                <button  class="cssmain2" id="number-6" value="6"> 6 </button>
+                <button  class="cssmain2" id="number-7" value="7"> 7 </button>
+                <button  class="cssmain2" id="number-8" value="8"> 8 </button>
+                <button  class="cssmain2" id="number-9" value="9"> 9 </button>
+                <!-- <button  class="number"> 1 </button> -->
+                <button class="cssmain2" id="number-delete" value="delete">
+                    <span class="material-icons-round keyboard-circle">close</span>
+                </button>
+                <button  class="cssmain2" id="number-0" value="0"> 0 </button>
+                <button class="cssmain2" id="number-enter" value="enter">
+                    <span class="material-icons-round keyboard-circle">check</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</body>
