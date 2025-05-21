@@ -776,6 +776,7 @@ function keyboardClick(value){
             }
         }else{
             mistake=1;
+            totalMistake++;
             blink('example-answer-block','bad')
         }
     } else if(answerUser.length < 6){
