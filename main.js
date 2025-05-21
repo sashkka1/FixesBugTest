@@ -724,14 +724,15 @@ function keyboardClick(value){
 
             // сохраняю результаты в облако
             window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
+                console.log('0', stats);
                 if (stats === null || stats === undefined || stats === "") {
                     for(let i=1;i<=daysInMonth;i++){
                         stats[i]= [0,0,0];
                     };    
                     stats[0] = monthIndex;
-                    stats[currentDay][0] = Number(stats[currentDay][0]) + Number(TimeForSave);
-                    stats[currentDay][1] = Number(stats[currentDay][1]) + 1;
-                    stats[currentDay][2] = Number(stats[currentDay][2]) + Number(mistake);
+                    stats[currentDay][0] = Number(TimeForSave);
+                    stats[currentDay][1] = 1;
+                    stats[currentDay][2] = Number(mistake);
                     console.log('mistake1 - ',Number(mistake));
                 }else{
                     stats = JSON.parse(stats);
