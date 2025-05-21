@@ -726,6 +726,7 @@ function keyboardClick(value){
             window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
                 console.log('0', stats);
                 if (stats === null || stats === undefined || stats === "") {
+                    console.log('01', stats);
                     for(let i=1;i<=daysInMonth;i++){
                         stats[i]= [0,0,0];
                     };    
@@ -733,11 +734,13 @@ function keyboardClick(value){
                     stats[currentDay][0] = Number(TimeForSave);
                     stats[currentDay][1] = 1;
                     stats[currentDay][2] = Number(mistake);
-                    console.log('mistake1 - ',Number(mistake));
+                    console.log('02', stats);
                 }else{
+                    console.log('11', stats);
                     stats = JSON.parse(stats);
-                    console.log('1', stats);
+                    console.log('12', stats);
                     if(stats[0]!= monthIndex){
+                        console.log('121', stats);
                         window.Telegram.WebApp.CloudStorage.setItem("oldstats", JSON.stringify(stats));
                         for(let i=1;i<=daysInMonth;i++){
                             stats[i]= [0,0,0];
@@ -746,13 +749,15 @@ function keyboardClick(value){
                         stats[currentDay][0] = Number(stats[currentDay][0]) + Number(TimeForSave);
                         stats[currentDay][1] = Number(stats[currentDay][1]) + 1;
                         stats[currentDay][2] = Number(stats[currentDay][2]) + Number(mistake);
-                        console.log('mistake2 - ',Number(mistake));
+                        console.log('122', stats);
                     }else{
+                        console.log('123', stats);
                         stats[currentDay][0] = Number(stats[currentDay][0]) + Number(TimeForSave);
                         stats[currentDay][1] = Number(stats[currentDay][1]) + 1;
                         stats[currentDay][2] = Number(stats[currentDay][2]) + Number(mistake);
-                        console.log('mistake3 - ',Number(mistake));
+                        console.log('124', stats);
                     }   
+                    console.log('13', stats);
                 }
                 window.Telegram.WebApp.CloudStorage.setItem("stats", JSON.stringify(stats));
                 console.log('2', stats);
@@ -939,7 +944,7 @@ function themeChange(color){
 
 
 document.addEventListener('DOMContentLoaded', () => { // первый заход и разложение сохраненных значений
-    alert('1');
+    alert('2');
     window.Telegram.WebApp.expand();
     window.Telegram.WebApp.disableVerticalSwipes();
     if(localStorage.getItem('userTheme') == null || localStorage.getItem('userTheme') === undefined || localStorage.getItem('userTheme') === "" ){
