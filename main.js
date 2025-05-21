@@ -735,6 +735,7 @@ function keyboardClick(value){
                     console.log('mistake1 - ',Number(mistake));
                 }else{
                     stats = JSON.parse(stats);
+                    console.log('1', stats);
                     if(stats[0]!= monthIndex){
                         window.Telegram.WebApp.CloudStorage.setItem("oldstats", JSON.stringify(stats));
                         for(let i=1;i<=daysInMonth;i++){
@@ -777,7 +778,7 @@ function keyboardClick(value){
                 setExample();
             }
         }else{
-            mistake++;
+            mistake=1;
             blink('example-answer-block','bad')
         }
     } else if(answerUser.length < 6){
