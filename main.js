@@ -86,81 +86,72 @@ function statisticOpen(){
 
 
     window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
-        // let stats = [];
-        // for(let i=1;i<=31;i++){
-        //     stats[i] = [];
-        //     stats[i][0] = Math.floor(Math.random() * (20 - 10 + 1)) + 10;
-        //     stats[i][1] = Math.floor(Math.random() * (20 - 10 + 1)) + 10;
-        //     stats[i][2] = Math.floor(Math.random() * (20 - 10 + 1)) + 10;
-        // }
-        // stats = JSON.stringify(stats)
-        // console.log('stats',stats);
 
         if (stats === null || stats === undefined || stats === "") {
         }else{
-            let arrayGraphExamples = [], arrayGraphTime = [], arrayGraphMistake = [];   
-            stats = JSON.parse(stats);
-            console.log('stats1',stats);
-            // если пользователь зашел в новом месяце и сразу посмотрит статистику то она должна быть пустой а не прошлого месяца
-        //     if(stats[0]!= monthIndex){
-        //         window.Telegram.WebApp.CloudStorage.setItem("oldstats", JSON.stringify(stats));
-        //         for(let i=1;i<=daysInMonth;i++){
-        //             stats[i]= [0,0,0];
-        //         };    
-        //     }
-        //     // заполняю массив для рисования месячных графиков
-        //     for (let i = 1; i <= daysInMonth; i++) {
-        //         arrayGraphExamples.push({
-        //             day: String(i),
-        //             examples: stats[i][1],
-        //         });
-        //         arrayGraphTime.push({
-        //             day: String(i),
-        //             time: (stats[i][0]/60).toFixed(2),
-        //         });
+            // let arrayGraphExamples = [], arrayGraphTime = [], arrayGraphMistake = [];   
+            // stats = JSON.parse(stats);
+            // console.log('stats1',stats);
+            // // если пользователь зашел в новом месяце и сразу посмотрит статистику то она должна быть пустой а не прошлого месяца
+            // if(stats[0]!= monthIndex){
+            //     window.Telegram.WebApp.CloudStorage.setItem("oldstats", JSON.stringify(stats));
+            //     for(let i=1;i<=daysInMonth;i++){
+            //         stats[i]= [0,0,0];
+            //     };    
+            // }
+            // // заполняю массив для рисования месячных графиков
+            // for (let i = 1; i <= daysInMonth; i++) {
+            //     arrayGraphExamples.push({
+            //         day: String(i),
+            //         examples: stats[i][1],
+            //     });
+            //     arrayGraphTime.push({
+            //         day: String(i),
+            //         time: (stats[i][0]/60).toFixed(2),
+            //     });
 
-        //         let number=0;
-        //         if(stats[i][2] != 0){
-        //             number = ((stats[i][1] - stats[i][2])/stats[i][1]).toFixed(2);
-        //         }
-        //         arrayGraphMistake.push({
-        //             day: String(i),
-        //             mistake: number,
-        //         });
-        //     }
-        //     // рисую графики примеров
-        //     new Morris.Line({
-        //         element: 'examples',
-        //         data: arrayGraphExamples,
-        //         xkey: 'day',
-        //         parseTime: false,
-        //         ykeys: ['examples'],
-        //         // hideHover: 'always',
-        //         labels: ['examples'],
-        //         lineColors: ['green']
-        //     });
-        //     // рисую графики времени
-        //     new Morris.Line({
-        //         element: 'time',
-        //         data: arrayGraphTime,
-        //         xkey: 'day',
-        //         parseTime: false,
-        //         ykeys: ['time'],
-        //         // hideHover: 'always',
-        //         labels: ['time'],
-        //         lineColors: ['blue']
-        //     });
-        //     // рисую графики ошибок
-        //     new Morris.Line({
-        //         element: 'mistake',
-        //         data: arrayGraphMistake,
-        //         xkey: 'day',
-        //         parseTime: false,
-        //         ykeys: ['mistake'],
-        //         // hideHover: 'always',
-        //         labels: ['mistake'],
-        //         lineColors: ['red']
-        //     });
+            //     let number=0;
+            //     if(stats[i][2] != 0){
+            //         number = ((stats[i][1] - stats[i][2])/stats[i][1]).toFixed(2);
+            //     }
+            //     arrayGraphMistake.push({
+            //         day: String(i),
+            //         mistake: number,
+            //     });
+            // }
+            // // рисую графики примеров
+            // new Morris.Line({
+            //     element: 'graph-wrapper-examples',
+            //     data: arrayGraphExamples,
+            //     xkey: 'day',
+            //     parseTime: false,
+            //     ykeys: ['examples'],
+            //     // hideHover: 'always',
+            //     labels: ['examples'],
+            //     lineColors: ['green']
+            // });
+            // // рисую графики времени
+            // new Morris.Line({
+            //     element: 'graph-wrapper-time',
+            //     data: arrayGraphTime,
+            //     xkey: 'day',
+            //     parseTime: false,
+            //     ykeys: ['time'],
+            //     // hideHover: 'always',
+            //     labels: ['time'],
+            //     lineColors: ['blue']
+            // });
+            // // рисую графики ошибок
+            // new Morris.Line({
+            //     element: 'graph-wrapper-mistake',
+            //     data: arrayGraphMistake,
+            //     xkey: 'day',
+            //     parseTime: false,
+            //     ykeys: ['mistake'],
+            //     // hideHover: 'always',
+            //     labels: ['mistake'],
+            //     lineColors: ['red']
+            // });
         }
         // graphToToday('graph-conteiner-examples','graph-wrapper-examples'); // передвигаю на текущую дату
         // graphToToday('graph-conteiner-time','graph-wrapper-time'); 
@@ -175,6 +166,7 @@ function statisticClose(){
     block = document.getElementById('statistic');
     block.classList.add('none');
 }
+
 
 // function graphToToday(one,two){
 //     let today = new Date().getDate(); // получаем текущий день месяца
@@ -205,7 +197,6 @@ function statisticClose(){
 //         }
 //     }, 100);
 // }
-
 
 
 function fromHomeToExample() { // переход с главного экрана на экран с пирмером
