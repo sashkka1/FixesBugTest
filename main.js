@@ -727,6 +727,7 @@ function keyboardClick(value){
                 console.log('0', stats);
                 if (stats === null || stats === undefined || stats === "") {
                     console.log('01', stats);
+                    stats =[];
                     for(let i=1;i<=daysInMonth;i++){
                         stats[i]= [0,0,0];
                     };    
@@ -944,7 +945,7 @@ function themeChange(color){
 
 
 document.addEventListener('DOMContentLoaded', () => { // первый заход и разложение сохраненных значений
-    alert('3');
+    alert('4');
     window.Telegram.WebApp.expand();
     window.Telegram.WebApp.disableVerticalSwipes();
     if(localStorage.getItem('userTheme') == null || localStorage.getItem('userTheme') === undefined || localStorage.getItem('userTheme') === "" ){
