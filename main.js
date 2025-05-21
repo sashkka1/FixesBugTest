@@ -752,6 +752,7 @@ function keyboardClick(value){
                 }
                 window.Telegram.WebApp.CloudStorage.setItem("stats", JSON.stringify(stats));
                 console.log('2', stats);
+                totalMistake += mistake;
                 mistake=0;
             });
 
@@ -776,7 +777,6 @@ function keyboardClick(value){
             }
         }else{
             mistake=1;
-            totalMistake++;
             blink('example-answer-block','bad')
         }
     } else if(answerUser.length < 6){
