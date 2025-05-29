@@ -1,4 +1,4 @@
-    alert('2');
+    alert('3');
 let values =[]; // 0+   1-   2x   3/  4t  5+-(min)  6+-(max)  7x/(min)  8x/(max) 
 let examples =[];
 let score = 1, mistake =0, mistakeTwo=0,timeForStatsArray=0, mistakeForStatsArray=0, examplesForStatsArray=0, totalTime=0,examplesCount=10;
@@ -287,11 +287,13 @@ function fromExampleToHome(back) {// переход с экрана с пирм�
             console.log('2', stats);
         });
 
-        totalMistake += mistakeTwo;
-        mistakeTwo=0;
-        mistakeForStatsArray+=mistakeTwo;
+        totalMistake += mistake;
+
+
+        mistakeForStatsArray += mistakeTwo;
         examplesForStatsArray++;
         timeForStatsArray += TimeForSave;
+        mistakeTwo=0;
 
         let a;
         if(tens <= 9){
@@ -790,11 +792,11 @@ function keyboardClick(value){
             }
             TimeForSaveOld = seconds+(tens*0.01);
 
-            totalMistake += mistakeTwo;
-            mistakeTwo=0;
             mistakeForStatsArray+=mistakeTwo;
             examplesForStatsArray++;
-            timeForStatsArray += TimeForSave;
+            timeForStatsArray = +timeForStatsArray + +TimeForSave;
+            mistakeTwo=0;
+            console.log('mistakeForStatsArray - ',mistakeForStatsArray,',examplesForStatsArray - ',  examplesForStatsArray, ',timeForStatsArray - ' ,timeForStatsArray);
 
             // сохраняю результаты в облако
             window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
@@ -828,6 +830,8 @@ function keyboardClick(value){
                 // console.log('2', stats);
                 mistake=0;
             });
+
+            totalMistake += mistake;  
 
             if(score>=(+examplesCount+1)){
                 let a;
