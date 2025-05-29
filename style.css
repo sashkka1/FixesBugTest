@@ -653,8 +653,8 @@ input[type=range].lower-double::-webkit-slider-runnable-track {
 .easy-basket-filter-ticks-double > div {
     height: 100%;
     width: 1px;
-    background: #DDD;
-    color: #888;
+    /* background: #DDD;
+    color: #888; */
 }
 .easy-basket-filter-ticks-double > div:nth-child(10n - 9) {
     height: 150%;
@@ -736,8 +736,8 @@ input[type=range].lower-three::-webkit-slider-runnable-track {
 .easy-basket-filter-ticks-three > div {
     height: 100%;
     width: 1px;
-    background: #DDD;
-    color: #888;
+    /* background: #DDD;
+    color: #888; */
 }
 .easy-basket-filter-ticks-three > div:nth-child(10n - 9) {
     height: 150%;
