@@ -1,7 +1,7 @@
 
 let values =[]; // 0+   1-   2x   3/  4t  5+-(min)  6+-(max)  7x/(min)  8x/(max) 
 let examples =[];
-let score = 1, mistake =0, totalMistake=0,examplesCount=10;
+let score = 1, mistake =0, totalMistake=0, mistakeForStatsArray=0, totalExamples=0, totalTime=0,examplesCount=10;
 let block;
 let numberOne,numberTwo,answer;
 
@@ -25,7 +25,7 @@ let daysInLastMonth = new Date(new Date().getFullYear(), (new Date().getMonth()-
 // индекст текущего месяцы
 let monthIndex = new Date().getMonth();
 // массив для сохранения в облако
-// let statsArray =[]; //0(время), 1(количество решенных примеров), 2(количество ошибок)
+let statsArray =[]; //0(время), 1(количество решенных примеров), 2(количество ошибок)
 let TimeForSave,TimeForSaveOld=0; // запоминаю время перед его обнулением
 let dayIndex = new Date().getDay();  // индекс дня недели
 let oldstats=[];
@@ -87,9 +87,15 @@ function statisticOpen(){
 
     window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
 
+        let arrayGraphExamples = [], arrayGraphTime = [], arrayGraphMistake = [];
         if (stats === null || stats === undefined || stats === "") {
-        }else{
-            let arrayGraphExamples = [], arrayGraphTime = [], arrayGraphMistake = [];   
+            console.log('1',typeof(stats),stats);
+            stats =[];
+            for(let i=1;i<=daysInMonth;i++){
+                stats[i]= [0,0,0];
+            }; 
+                console.log('1',typeof(stats),stats);
+        }else{   
             stats = JSON.parse(stats);
             console.log('stats1',stats);
             // если пользователь зашел в новом месяце и сразу посмотрит статистику то она должна быть пустой а не прошлого месяца
@@ -99,60 +105,61 @@ function statisticOpen(){
                     stats[i]= [0,0,0];
                 };    
             }
-            // заполняю массив для рисования месячных графиков
-            for (let i = 1; i <= daysInMonth; i++) {
-                arrayGraphExamples.push({
-                    day: String(i),
-                    examples: stats[i][1],
-                });
-                arrayGraphTime.push({
-                    day: String(i),
-                    time: (stats[i][0]/60).toFixed(2),
-                });
+        }
 
-                let number=0;
-                if(stats[i][2] != 0){
-                    number = ((stats[i][1] - stats[i][2])/stats[i][1]).toFixed(2);
-                }
-                arrayGraphMistake.push({
-                    day: String(i),
-                    mistake: number,
-                });
+        // заполняю массив для рисования месячных графиков
+        for (let i = 1; i <= daysInMonth; i++) {
+            arrayGraphExamples.push({
+                day: String(i),
+                examples: stats[i][1],
+            });
+            arrayGraphTime.push({
+                day: String(i),
+                time: (stats[i][0]/60).toFixed(2),
+            });
+
+            let number=0;
+            if(stats[i][2] != 0){
+                number = ((stats[i][1] - stats[i][2])/stats[i][1]).toFixed(2);
             }
-            // рисую графики примеров
-            new Morris.Line({
-                element: 'graph-wrapper-examples',
-                data: arrayGraphExamples,
-                xkey: 'day',
-                parseTime: false,
-                ykeys: ['examples'],
-                // hideHover: 'always',
-                labels: ['examples'],
-                lineColors: ['green']
-            });
-            // рисую графики времени
-            new Morris.Line({
-                element: 'graph-wrapper-time',
-                data: arrayGraphTime,
-                xkey: 'day',
-                parseTime: false,
-                ykeys: ['time'],
-                // hideHover: 'always',
-                labels: ['time'],
-                lineColors: ['blue']
-            });
-            // рисую графики ошибок
-            new Morris.Line({
-                element: 'graph-wrapper-mistake',
-                data: arrayGraphMistake,
-                xkey: 'day',
-                parseTime: false,
-                ykeys: ['mistake'],
-                // hideHover: 'always',
-                labels: ['mistake'],
-                lineColors: ['red']
+            arrayGraphMistake.push({
+                day: String(i),
+                mistake: number,
             });
         }
+        // рисую графики примеров
+        new Morris.Line({
+            element: 'graph-wrapper-examples',
+            data: arrayGraphExamples,
+            xkey: 'day',
+            parseTime: false,
+            ykeys: ['examples'],
+            // hideHover: 'always',
+            labels: ['examples'],
+            lineColors: ['green']
+        });
+        // рисую графики времени
+        new Morris.Line({
+            element: 'graph-wrapper-time',
+            data: arrayGraphTime,
+            xkey: 'day',
+            parseTime: false,
+            ykeys: ['time'],
+            // hideHover: 'always',
+            labels: ['time'],
+            lineColors: ['blue']
+        });
+        // рисую графики ошибок
+        new Morris.Line({
+            element: 'graph-wrapper-mistake',
+            data: arrayGraphMistake,
+            xkey: 'day',
+            parseTime: false,
+            ykeys: ['mistake'],
+            // hideHover: 'always',
+            labels: ['mistake'],
+            lineColors: ['red']
+        });
         graphToToday('graph-conteiner-examples','graph-wrapper-examples'); // передвигаю на текущую дату
         graphToToday('graph-conteiner-time','graph-wrapper-time'); 
         graphToToday('graph-conteiner-mistake','graph-wrapper-mistake');
@@ -231,17 +238,16 @@ function fromHomeToExample() { // переход с главного экран�
 
     // обнуляю масив примеров, ошибки и количество примеров перед новой итерацией
     examples =[]; 
-    mistake=0;
-    totalMistake=0;
+    mistake=0, totalMistake=0, mistakeForStatsArray=0, totalExamples=0, totalTime=0;
     score=1;
     setExample();
 }
 
-function fromExampleToHome(back) {// переход с экранв с пирмером на главный экран
+function fromExampleToHome(back) {// переход с экрана с пирмером на главный экран
 
 
     if(back === 1){
-        console.log('0totalMistake',totalMistake,'mistake',mistake);
+        // console.log('0totalMistake',totalMistake,'mistake',mistake);
         if(TimeForSaveOld == 0){
             TimeForSave = seconds+(tens*0.01);
         }else{
@@ -281,7 +287,10 @@ function fromExampleToHome(back) {// переход с экранв с пирм�
             console.log('2', stats);
         });
 
-        totalMistake += mistake;
+        totalMistake += mistakeForStatsArray;
+        mistakeForStatsArray=0;
+        totalExamples++;
+        totalTime += TimeForSave;
 
         let a;
         if(tens <= 9){
@@ -297,6 +306,7 @@ function fromExampleToHome(back) {// переход с экранв с пирм�
         }
         document.getElementById('win-message').outerHTML = `<p id="win-message" class="win-message ">Ошибки: ${totalMistake} <br> Время: ${b}:${a}</p>`;
     }
+    console.log(totalMistake, ' - totalMistake', totalExamples, ' - totalExamples', totalTime, ' - totalTime');
     //меняю ползунки и чекбоксы на сохраненные значения
     let test = localStorage.getItem('values');
 
@@ -778,6 +788,10 @@ function keyboardClick(value){
             }
             TimeForSaveOld = seconds+(tens*0.01);
 
+            totalMistake += mistakeForStatsArray;
+            mistakeForStatsArray=0;
+            totalExamples++;
+            totalTime += TimeForSave;
 
             // сохраняю результаты в облако
             window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
@@ -811,7 +825,6 @@ function keyboardClick(value){
                 console.log('2', stats);
                 mistake=0;
             });
-            totalMistake += mistake;
 
             if(score>=(+examplesCount+1)){
                 let a;
@@ -833,6 +846,7 @@ function keyboardClick(value){
             }
         }else{
             mistake=1;
+            mistakeForStatsArray=1;
             blink('example-answer-block','bad')
         }
     } else if(answerUser.length < 6){
@@ -1000,24 +1014,44 @@ document.addEventListener('DOMContentLoaded', () => { // первый заход
     }else{
         document.getElementById('theme').href = `./thems/${localStorage.getItem('userTheme')}.css`;
     }
-    // window.Telegram.WebApp.CloudStorage.getItem("values", (err,test) => {
-        let test = localStorage.getItem('values');
-        let checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        // console.log(test);
-        if (test === null || test === undefined || test === "") {
-            for(let i =0;i<5;i++){    
+    let test = localStorage.getItem('values');
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    if (test === null || test === undefined || test === "") {
+        for(let i =0;i<5;i++){    
+            checkboxes[i].checked = true;
+        }
+    }else{
+        let forMemery = test.split(',');
+        for(let i =0;i<5;i++){  
+            if(forMemery[i] == "true"){
                 checkboxes[i].checked = true;
             }
-        }else{
-            let forMemery = test.split(',');
-            for(let i =0;i<5;i++){  
-                if(forMemery[i] == "true"){
-                    checkboxes[i].checked = true;
-                }
-            }
-            dinamicRange();
         }
-    // });
+        dinamicRange();
+    }
+
+    alert('1');
+    window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
+
+        if (stats === null || stats === undefined || stats === "") {
+            stats =[];
+            for(let i=1;i<=daysInMonth;i++){
+                stats[i]= [0,0,0];
+            }; 
+            statsArray = [0,0,0];
+        }else{   
+            stats = JSON.parse(stats);
+            statsArray = [stats[currentDay][0],stats[currentDay][1],stats[currentDay][2]];
+            if(stats[0]!= monthIndex){
+                window.Telegram.WebApp.CloudStorage.setItem("oldstats", JSON.stringify(stats));
+                for(let i=1;i<=daysInMonth;i++){
+                    stats[i]= [0,0,0];
+                };    
+                statsArray = [0,0,0];
+            }
+        }
+        console.log('statsArray - ', statsArray);
+    });
 })
 
 
