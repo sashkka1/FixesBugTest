@@ -1,4 +1,4 @@
-    alert('3');
+    alert('4');
 let values =[]; // 0+   1-   2x   3/  4t  5+-(min)  6+-(max)  7x/(min)  8x/(max) 
 let examples =[];
 let score = 1, mistake =0, mistakeTwo=0,timeForStatsArray=0, mistakeForStatsArray=0, examplesForStatsArray=0, totalTime=0,examplesCount=10;
@@ -792,9 +792,10 @@ function keyboardClick(value){
             }
             TimeForSaveOld = seconds+(tens*0.01);
 
+            console.log('timeForStatsArray - ',timeForStatsArray,',TimeForSave - ',  TimeForSave);
             mistakeForStatsArray+=mistakeTwo;
             examplesForStatsArray++;
-            timeForStatsArray = +timeForStatsArray + +TimeForSave;
+            timeForStatsArray = Number(timeForStatsArray) + Number(TimeForSave);
             mistakeTwo=0;
             console.log('mistakeForStatsArray - ',mistakeForStatsArray,',examplesForStatsArray - ',  examplesForStatsArray, ',timeForStatsArray - ' ,timeForStatsArray);
 
