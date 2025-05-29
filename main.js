@@ -1,4 +1,4 @@
-    alert('7');
+    alert('8');
 let values =[]; // 0+   1-   2x   3/  4t  5+-(min)  6+-(max)  7x/(min)  8x/(max) 
 let examples =[];
 let score = 1, mistake =0, mistakeTwo=0,timeForStatsArray=0, mistakeForStatsArray=0, examplesForStatsArray=0, totalTime=0,examplesCount=10;
@@ -86,7 +86,7 @@ function statisticOpen(){
 
 
     window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
-
+console.log(stats);
         let arrayGraphExamples = [], arrayGraphTime = [], arrayGraphMistake = [];
         if (stats === null || stats === undefined || stats === "") {
             console.log('1',typeof(stats),stats);
@@ -314,8 +314,9 @@ function fromExampleToHome(back) {// переход с экрана с пирм�
             stats[currentDay][0] = (+statsArray[0] + +timeForStatsArray);
             stats[currentDay][1] = (+statsArray[1] + +examplesForStatsArray);
             stats[currentDay][2] = (+statsArray[2] + +mistakeForStatsArray);
+            window.Telegram.WebApp.CloudStorage.setItem("stats", JSON.stringify(stats));
         }
-        window.Telegram.WebApp.CloudStorage.setItem("stats", JSON.stringify(stats));
+        console.log(stats);
     });
 
     //меняю ползунки и чекбоксы на сохраненные значения
