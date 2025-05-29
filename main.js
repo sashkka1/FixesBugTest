@@ -1,4 +1,4 @@
-    alert('4');
+    alert('5');
 let values =[]; // 0+   1-   2x   3/  4t  5+-(min)  6+-(max)  7x/(min)  8x/(max) 
 let examples =[];
 let score = 1, mistake =0, mistakeTwo=0,timeForStatsArray=0, mistakeForStatsArray=0, examplesForStatsArray=0, totalTime=0,examplesCount=10;
@@ -238,7 +238,7 @@ function fromHomeToExample() { // переход с главного экран�
 
     // обнуляю масив примеров, ошибки и количество примеров перед новой итерацией
     examples =[]; 
-    mistake=0, totalMistake=0, mistakeTwo=0;
+    mistake=0, totalMistake=0, mistakeTwo=0,TimeForSaveOld=0;
     score=1;
     setExample();
 }
