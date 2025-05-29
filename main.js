@@ -1,4 +1,4 @@
-    alert('5');
+    alert('6');
 let values =[]; // 0+   1-   2x   3/  4t  5+-(min)  6+-(max)  7x/(min)  8x/(max) 
 let examples =[];
 let score = 1, mistake =0, mistakeTwo=0,timeForStatsArray=0, mistakeForStatsArray=0, examplesForStatsArray=0, totalTime=0,examplesCount=10;
@@ -289,10 +289,9 @@ function fromExampleToHome(back) {// переход с экрана с пирм�
 
         totalMistake += mistake;
 
-
-        mistakeForStatsArray += mistakeTwo;
+        mistakeForStatsArray+=mistakeTwo;
         examplesForStatsArray++;
-        timeForStatsArray += TimeForSave;
+        timeForStatsArray = Number(timeForStatsArray) + Number(TimeForSave);
         mistakeTwo=0;
 
         let a;
@@ -309,6 +308,16 @@ function fromExampleToHome(back) {// переход с экрана с пирм�
         }
         document.getElementById('win-message').outerHTML = `<p id="win-message" class="win-message ">Ошибки: ${totalMistake} <br> Время: ${b}:${a}</p>`;
     }
+    
+    window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
+    
+        console.log('stats[currentDay][0] - ',stats[currentDay][0],'(+statsArray[0] + +timeForStatsArray) - ', (+statsArray[0] + +timeForStatsArray));
+        if(+stats[currentDay][0] != (+statsArray[0] + +timeForStatsArray)){
+
+        }
+        
+    });
+
     console.log('mistakeForStatsArray - ',mistakeForStatsArray,',examplesForStatsArray - ',  examplesForStatsArray, ',timeForStatsArray - ' ,timeForStatsArray);
     console.log(statsArray);
     //меняю ползунки и чекбоксы на сохраненные значения
@@ -792,12 +801,10 @@ function keyboardClick(value){
             }
             TimeForSaveOld = seconds+(tens*0.01);
 
-            console.log('timeForStatsArray - ',timeForStatsArray,',TimeForSave - ',  TimeForSave);
             mistakeForStatsArray+=mistakeTwo;
             examplesForStatsArray++;
             timeForStatsArray = Number(timeForStatsArray) + Number(TimeForSave);
             mistakeTwo=0;
-            console.log('mistakeForStatsArray - ',mistakeForStatsArray,',examplesForStatsArray - ',  examplesForStatsArray, ',timeForStatsArray - ' ,timeForStatsArray);
 
             // сохраняю результаты в облако
             window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
