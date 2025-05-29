@@ -1,7 +1,7 @@
-
+    alert('2');
 let values =[]; // 0+   1-   2x   3/  4t  5+-(min)  6+-(max)  7x/(min)  8x/(max) 
 let examples =[];
-let score = 1, mistake =0, totalMistake=0, mistakeForStatsArray=0, totalExamples=0, totalTime=0,examplesCount=10;
+let score = 1, mistake =0, mistakeTwo=0,timeForStatsArray=0, mistakeForStatsArray=0, examplesForStatsArray=0, totalTime=0,examplesCount=10;
 let block;
 let numberOne,numberTwo,answer;
 
@@ -238,7 +238,7 @@ function fromHomeToExample() { // переход с главного экран�
 
     // обнуляю масив примеров, ошибки и количество примеров перед новой итерацией
     examples =[]; 
-    mistake=0, totalMistake=0, mistakeForStatsArray=0, totalExamples=0, totalTime=0;
+    mistake=0, totalMistake=0, mistakeTwo=0;
     score=1;
     setExample();
 }
@@ -287,10 +287,11 @@ function fromExampleToHome(back) {// переход с экрана с пирм�
             console.log('2', stats);
         });
 
-        totalMistake += mistakeForStatsArray;
-        mistakeForStatsArray=0;
-        totalExamples++;
-        totalTime += TimeForSave;
+        totalMistake += mistakeTwo;
+        mistakeTwo=0;
+        mistakeForStatsArray+=mistakeTwo;
+        examplesForStatsArray++;
+        timeForStatsArray += TimeForSave;
 
         let a;
         if(tens <= 9){
@@ -306,7 +307,8 @@ function fromExampleToHome(back) {// переход с экрана с пирм�
         }
         document.getElementById('win-message').outerHTML = `<p id="win-message" class="win-message ">Ошибки: ${totalMistake} <br> Время: ${b}:${a}</p>`;
     }
-    console.log(totalMistake, ' - totalMistake', totalExamples, ' - totalExamples', totalTime, ' - totalTime');
+    console.log('mistakeForStatsArray - ',mistakeForStatsArray,',examplesForStatsArray - ',  examplesForStatsArray, ',timeForStatsArray - ' ,timeForStatsArray);
+    console.log(statsArray);
     //меняю ползунки и чекбоксы на сохраненные значения
     let test = localStorage.getItem('values');
 
@@ -788,10 +790,11 @@ function keyboardClick(value){
             }
             TimeForSaveOld = seconds+(tens*0.01);
 
-            totalMistake += mistakeForStatsArray;
-            mistakeForStatsArray=0;
-            totalExamples++;
-            totalTime += TimeForSave;
+            totalMistake += mistakeTwo;
+            mistakeTwo=0;
+            mistakeForStatsArray+=mistakeTwo;
+            examplesForStatsArray++;
+            timeForStatsArray += TimeForSave;
 
             // сохраняю результаты в облако
             window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
@@ -822,7 +825,7 @@ function keyboardClick(value){
                     }   
                 }
                 window.Telegram.WebApp.CloudStorage.setItem("stats", JSON.stringify(stats));
-                console.log('2', stats);
+                // console.log('2', stats);
                 mistake=0;
             });
 
@@ -846,7 +849,7 @@ function keyboardClick(value){
             }
         }else{
             mistake=1;
-            mistakeForStatsArray=1;
+            mistakeTwo=1;
             blink('example-answer-block','bad')
         }
     } else if(answerUser.length < 6){
@@ -1006,6 +1009,7 @@ function themeChange(color){
 
 
 document.addEventListener('DOMContentLoaded', () => { // первый заход и разложение сохраненных значений
+    
     window.Telegram.WebApp.expand();
     window.Telegram.WebApp.disableVerticalSwipes();
     if(localStorage.getItem('userTheme') == null || localStorage.getItem('userTheme') === undefined || localStorage.getItem('userTheme') === "" ){
@@ -1030,7 +1034,6 @@ document.addEventListener('DOMContentLoaded', () => { // первый заход
         dinamicRange();
     }
 
-    alert('1');
     window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
 
         if (stats === null || stats === undefined || stats === "") {
