@@ -1,4 +1,4 @@
-    alert('1');
+    alert('2');
 let values =[]; // 0+   1-   2x   3/  4t  5+-(min)  6+-(max)  7x/(min)  8x/(max) 
 let examples =[];
 let score = 1, mistake =0, mistakeTwo=0,timeForStatsArray=0, mistakeForStatsArray=0, examplesForStatsArray=0, totalTime=0,examplesCount=10;
@@ -1067,11 +1067,11 @@ document.addEventListener('DOMContentLoaded', () => { // первый заход
                 statsArray = [0,0,0];
             }
         }
-        console.log('stats - ', stats);
+        console.log('stats2 - ', stats, 'daysInMonth',daysInMonth);
         for(let i=1;i<=daysInMonth;i++){
             stats[i]= [0,0,0];
         }; 
-        console.log('stats - ', stats);
+        console.log('stats3 - ', stats);
         window.Telegram.WebApp.CloudStorage.setItem("stats", JSON.stringify(stats));
     });
 })
