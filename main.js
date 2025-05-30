@@ -109,6 +109,7 @@ console.log(stats);
 
         // заполняю массив для рисования месячных графиков
         for (let i = 1; i <= daysInMonth; i++) {
+            console.log('stats[i][1] - ', stats[i][1],'stats[i][2] - ', stats[i][2],'stats[i][0] - ', stats[i][0],);
             arrayGraphExamples.push({
                 day: String(i),
                 examples: stats[i][1],
@@ -1055,6 +1056,7 @@ document.addEventListener('DOMContentLoaded', () => { // первый заход
             statsArray = [0,0,0];
         }else{   
             stats = JSON.parse(stats);
+            console.log('stats1',stats);
             statsArray = [stats[currentDay][0],stats[currentDay][1],stats[currentDay][2]];
             if(stats[0]!= monthIndex){
                 window.Telegram.WebApp.CloudStorage.setItem("oldstats", JSON.stringify(stats));
