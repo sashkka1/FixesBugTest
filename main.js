@@ -86,7 +86,6 @@ function statisticOpen(){
 
 
     window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
-        console.log(stats);
         let arrayGraphExamples = [], arrayGraphTime = [], arrayGraphMistake = [];
         if (stats === null || stats === undefined || stats === "") {
             console.log('1',typeof(stats),stats);
@@ -109,7 +108,6 @@ function statisticOpen(){
 
         // заполняю массив для рисования месячных графиков
         for (let i = 1; i <= daysInMonth; i++) {
-            console.log('stats[i][1] - ', stats[i][1],'stats[i][2] - ', stats[i][2],'stats[i][0] - ', stats[i][0],);
             arrayGraphExamples.push({
                 day: String(i),
                 examples: stats[i][1],
@@ -248,7 +246,6 @@ function fromExampleToHome(back) {// переход с экрана с пирм�
 
 
     if(back === 1){
-        // console.log('0totalMistake',totalMistake,'mistake',mistake);
         if(TimeForSaveOld == 0){
             TimeForSave = seconds+(tens*0.01);
         }else{
@@ -318,7 +315,6 @@ function fromExampleToHome(back) {// переход с экрана с пирм�
             stats[currentDay][2] = (+statsArray[2] + +mistakeForStatsArray);
             window.Telegram.WebApp.CloudStorage.setItem("stats", JSON.stringify(stats));
         }
-        console.log(stats);
     });
 
     //меняю ползунки и чекбоксы на сохраненные значения
@@ -1070,7 +1066,7 @@ document.addEventListener('DOMContentLoaded', () => { // первый заход
     });
 })
 
-    alert('6');
+    // alert('7');
 
 
 
