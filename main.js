@@ -311,6 +311,7 @@ function fromExampleToHome(back) {// переход с экрана с пирм�
     }
     
     window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
+        stats = JSON.parse(stats);
         if(+stats[currentDay][0] != (+statsArray[0] + +timeForStatsArray)){
             stats[currentDay][0] = (+statsArray[0] + +timeForStatsArray);
             stats[currentDay][1] = (+statsArray[1] + +examplesForStatsArray);
