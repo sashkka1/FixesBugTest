@@ -86,7 +86,7 @@ function statisticOpen(){
 
 
     window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
-console.log(stats);
+        console.log(stats);
         let arrayGraphExamples = [], arrayGraphTime = [], arrayGraphMistake = [];
         if (stats === null || stats === undefined || stats === "") {
             console.log('1',typeof(stats),stats);
@@ -1067,10 +1067,11 @@ document.addEventListener('DOMContentLoaded', () => { // первый заход
                 statsArray = [0,0,0];
             }
         }
-        console.log('statsArray - ', statsArray);
+        console.log('stats - ', stats);
         for(let i=1;i<=daysInMonth;i++){
             stats[i]= [0,0,0];
         }; 
+        console.log('stats - ', stats);
         window.Telegram.WebApp.CloudStorage.setItem("stats", JSON.stringify(stats));
     });
 })
