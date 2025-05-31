@@ -155,6 +155,7 @@ function statisticOpen(){
             parseTime: false,
             ykeys: ['time'],
             // hideHover: 'always',
+            resize: true,
             labels: ['time'],
             lineColors: ['blue']
         });
