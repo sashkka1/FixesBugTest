@@ -80,8 +80,8 @@ function addDivForGraph(){
     // Добавляю и удаляю потому что при нескольких заходов после решения примеров несколько раз hover 
     // показывает, поэтому перерисовываю график каждый раз при заходе на страницу статистики
     let examples = document.getElementById('graph-conteiner-examples');
-    let time = document.getElementById('graph-conteiner-examples');
-    let mistake = document.getElementById('graph-conteiner-examples');
+    let time = document.getElementById('graph-conteiner-time');
+    let mistake = document.getElementById('graph-conteiner-mistake');
     // Проверяем, что элемент ещё не добавлен
     if (!document.getElementById('graph-wrapper-examples')) {
         let newDiv = document.createElement('div');
@@ -104,8 +104,8 @@ function addDivForGraph(){
 }
 function deleteDivForGraph(){
     let examplesDiv = document.getElementById('graph-wrapper-examples');
-    let timeDiv = document.getElementById('graph-wrapper-examples');
-    let mistakeDiv = document.getElementById('graph-wrapper-examples');
+    let timeDiv = document.getElementById('graph-wrapper-time');
+    let mistakeDiv = document.getElementById('graph-wrapper-mistake');
     
     if (examplesDiv) {
         examplesDiv.remove();
@@ -206,14 +206,14 @@ function statisticOpen(){
     });
 
 }
-    alert('1');
+    alert('2');
 
 function statisticClose(){
     block = document.getElementById('main1');
     block.classList.remove('none');
     block = document.getElementById('statistic');
     block.classList.add('none');
-    deleteDivForGraph
+    deleteDivForGraph();
 }
 
 
