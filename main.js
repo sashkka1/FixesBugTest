@@ -84,6 +84,16 @@ function statisticOpen(){
     block = document.getElementById('main1');
     block.classList.add('none');
 
+    const container = document.getElementById('graph-conteiner-examples');
+    
+    // Проверяем, что элемент ещё не добавлен
+    if (!document.getElementById('graph-wrapper-examples')) {
+        const newDiv = document.createElement('div');
+        newDiv.className = 'graph-wrapper-examples';
+        newDiv.id = 'graph-wrapper-examples';
+        container.appendChild(newDiv);
+    }
+
 
     window.Telegram.WebApp.CloudStorage.getItem("stats", (err, stats) => {
         let arrayGraphExamples = [], arrayGraphTime = [], arrayGraphMistake = [];
@@ -133,7 +143,7 @@ function statisticOpen(){
             xkey: 'day',
             parseTime: false,
             ykeys: ['examples'],
-            hideHover: 'always',
+            // hideHover: 'always',
             labels: ['examples'],
             lineColors: ['green']
         });
@@ -144,7 +154,7 @@ function statisticOpen(){
             xkey: 'day',
             parseTime: false,
             ykeys: ['time'],
-            hideHover: 'true',
+            // hideHover: 'always',
             labels: ['time'],
             lineColors: ['blue']
         });
@@ -155,7 +165,7 @@ function statisticOpen(){
             xkey: 'day',
             parseTime: false,
             ykeys: ['mistake'],
-            hideHover: 'false',
+            // hideHover: 'always',
             labels: ['mistake'],
             lineColors: ['red']
         });
@@ -165,13 +175,19 @@ function statisticOpen(){
     });
 
 }
-    alert('8');
+    alert('9');
 
 function statisticClose(){
     block = document.getElementById('main1');
     block.classList.remove('none');
     block = document.getElementById('statistic');
     block.classList.add('none');
+
+    const existingDiv = document.getElementById('graph-wrapper-examples');
+    
+    if (existingDiv) {
+        existingDiv.remove();
+    }
 }
 
 
