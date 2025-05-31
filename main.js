@@ -133,7 +133,7 @@ function statisticOpen(){
             xkey: 'day',
             parseTime: false,
             ykeys: ['examples'],
-            // hideHover: 'always',
+            hideHover: 'always',
             labels: ['examples'],
             lineColors: ['green']
         });
@@ -144,7 +144,7 @@ function statisticOpen(){
             xkey: 'day',
             parseTime: false,
             ykeys: ['time'],
-            // hideHover: 'always',
+            hideHover: 'true',
             labels: ['time'],
             lineColors: ['blue']
         });
@@ -155,7 +155,7 @@ function statisticOpen(){
             xkey: 'day',
             parseTime: false,
             ykeys: ['mistake'],
-            // hideHover: 'always',
+            hideHover: 'false',
             labels: ['mistake'],
             lineColors: ['red']
         });
@@ -165,6 +165,7 @@ function statisticOpen(){
     });
 
 }
+    alert('8');
 
 function statisticClose(){
     block = document.getElementById('main1');
@@ -1066,7 +1067,6 @@ document.addEventListener('DOMContentLoaded', () => { // первый заход
     });
 })
 
-    // alert('7');
 
 
 
